@@ -1,0 +1,41 @@
+```python
+def ordenamientoMezcla(lista):
+    if len(lista) <= 1:
+        return lista
+
+    mitad = len(lista) // 2
+
+    izquierda = lista[:mitad]
+    derecha = lista[mitad:]
+
+    izquierda = ordenamientoMezcla(izquierda)
+    derecha = ordenamientoMezcla(derecha)
+
+    return mezclar(izquierda, derecha)
+
+
+def mezclar(izquierda, derecha):
+    resultado = []
+
+    while izquierda and derecha:
+        if izquierda[0] > derecha[0]:
+            resultado.append(derecha.pop(0))
+        else:
+            resultado.append(izquierda.pop(0))
+
+    while izquierda:
+        resultado.append(izquierda.pop(0))
+
+    while derecha:
+        resultado.append(derecha.pop(0))
+
+    return resultado
+
+
+numeros = input("Ingrese los números separados por comas: ")
+numeros = list(map(int, numeros.split(",")))
+
+resultado = ordenamientoMezcla(numeros)
+
+print("Lista ordenada:", resultado)
+```
